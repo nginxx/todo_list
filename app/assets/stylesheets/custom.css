@@ -9,6 +9,9 @@ table{
     -moz-box-shadow: 11px 9px 20px -9px rgba(0,0,0,0.75);
     box-shadow: 11px 9px 20px -9px rgba(0,0,0,0.75);
 }
+table .glyphicon-trash:hover{
+    cursor: pointer;
+}
 /*Thead*/
 
 thead tr td{

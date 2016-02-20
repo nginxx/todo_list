@@ -1,7 +1,7 @@
 <%if @projects.present? %>
 <div class="todo-list">
     <% @projects.each do |project|%>
-      <div class="row">
+      <div class="row project_<%= project.id%>">
         <div class="col-md-8 col-md-offset-2">
           <table class="table">
             <thead>
@@ -14,7 +14,7 @@
               </td>
               <td>
                 <span class="glyphicon glyphicon-pencil"></span>&nbsp;
-                <span class="glyphicon glyphicon-trash"></span>
+                <span class="glyphicon glyphicon-trash" onclick="remove_item(<%=project.id%>,'project')"></span>
               </td>
             </tr>
 
@@ -24,29 +24,16 @@
                     <span class="glyphicon glyphicon-plus"></span>
                   </td>
                   <td>
-                    <%= text_field(:text,'',{class: 'form-control add_task', placeholder: 'Start typing here to create a task...'})%>
+                    <%= text_field(:text,'',{class: 'form-control task_filed', placeholder: 'Start typing here to create a task...'})%>
                   </td>
                   <td>
-                    <%= link_to 'Add task',:todo,{class: 'btn btn-add_task',remote: true} %>
+                    <span class="btn btn-add_task" onclick="add_task(<%=project.id%>)">Add task</span>
                   </td>
               <% end %>
             </tr>
             </thead>
             <tbody>
-            <tr>
-              <td>
-                <input type="checkbox">
-              </td>
-              <td>
-                Вже давно відомо, що читабельний зміст буде заважати зосередитись людині, яка оцінює композицію сторінки. Сенс використання Lorem Ipsum полягає в тому, що цей текст має більш-менш нормальне розподілення літер на відміну від, наприклад, "Тут іде текст. Тут іде текст." Це робить текст схожим на оповідний. Багато програм верстування та веб-дизайну використовують Lorem Ipsum як зразок і пошук за терміном "lorem ipsum" відкриє багато веб-сайтів, які знаходяться ще в зародковому стані. Різні версії Lorem Ipsum з'явились за минулі роки, деякі випадково, деякі було створено зумисно (зокрема, жартівливі).
-              </td>
-              <td>
-                <span class="fa fa-sort"></span>&nbsp;
-                <span class="fa fa-pencil"></span>&nbsp;
-                <span class="fa fa-trash"></span>
-              </td>
-            </tr>
-            <tr>
+            <tr class="task">
               <td>
                 <input type="checkbox">
               </td>
@@ -64,22 +51,22 @@
         </div>
       </div>
     <%end%>
-
-  <%= link_to 'Add TODO List',:add_project,{class: 'btn btn-primary btn-lg',remote: true} %>
-
-</div>
-<%else%>
-    <div class="row">
-        <div class="col-md-offset-3 col-md-6 text-center">
-          <h2>No projects found</h2>
-          <%= form_tag(:add_project, remote: true) do  %>
-              <div>
-                <%= text_field(:name,'',{class: 'form-control', placeholder: 'Start typing here to create a project'})%>
-              </div><br>
-              <div>
-                <%= submit_tag 'Add TODO List', class: 'btn btn-primary btn-lg btn-add_todo'%>
-              </div>
-          <% end %>
-        </div>
+    <div align="center" class="btn-add_todo_1">
+        <%= link_to 'Add TODO List',:add_project,{class: 'btn btn-primary btn-lg',remote: true} %>
     </div>
+</div>
 <%end%>
+
+<div class="row empty_projects hidden">
+  <div class="col-md-offset-3 col-md-6 text-center">
+    <h2>No projects found</h2>
+    <%= form_tag(:add_project, remote: true) do  %>
+        <div>
+          <%= text_field(:name,'',{class: 'form-control', placeholder: 'Start typing here to create a project'})%>
+        </div><br>
+        <div>
+          <%= submit_tag 'Add TODO List', class: 'btn btn-primary btn-lg btn-add_todo'%>
+        </div>
+    <% end %>
+  </div>
+</div>

@@ -22,9 +22,9 @@ ActiveRecord::Schema.define(version: 20160220133320) do
   end
 
   create_table "tasks", force: :cascade do |t|
-    t.string  "name",       null: false
-    t.integer "completed"
-    t.integer "project_id", null: false
+    t.string  "name",                   null: false
+    t.integer "completed",  default: 0
+    t.integer "project_id",             null: false
   end
 
   create_table "users", force: :cascade do |t|

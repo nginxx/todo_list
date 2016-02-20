@@ -3,7 +3,8 @@ class TodolistController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
   def index
-      @projects = Project.where(user_id: current_user.id)
+      @projects = Project.get_user_projects(current_user.id)
+      # render plain: @projects.to_yaml
       render 'todolist/index'
   end
 
@@ -13,7 +14,26 @@ class TodolistController < ApplicationController
         user_id: current_user.id
     }
     @project = Project.new(data)
-    @project.save
+    @project.save!
+  end
+
+  def delete_item()
+    type = params[:type]
+    id = params[:id]
+    if type == 'project'
+      Project.delete(id)
+    elsif type == 'task'
+      # finish for tasks todo
+    end
+  end
+
+  def add_task()
+      data = {
+          project_id: params[:id],
+          name: params[:task]
+      }
+      @task = Task.new(data)
+      @task.save!
   end
 
   def is_auth
