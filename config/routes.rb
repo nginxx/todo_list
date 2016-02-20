@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :sessions
 
   get 'todo_list' => 'todolist#index', as: 'todo'
+  get 'add_project' => 'todolist#add_project', as: 'add_project'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
