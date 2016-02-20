@@ -1,11 +1,14 @@
+body{
+    background-color: #C38C09;
+}
 .todo-list{
     margin-top: 30px;
 }
 /*
- header
+Header
 */
 
-header div:first-child div{
+header div div{
     background-color: #5082BF;
     height: 45px;
     color: whitesmoke;
@@ -28,4 +31,16 @@ header div:nth-child(2) div{
     color: whitesmoke;
     margin-bottom: 9px;
 }
+
+/*Content*/
+main div div{
+    border: 1px solid #D1D1D1;
+    background-color: white;
+}
+main div div:last-child{
+    color: #999999;
+    font-size: 16px;
+    padding-top: 7px;
+}
+
 
