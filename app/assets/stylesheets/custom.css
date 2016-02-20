@@ -1,0 +1,31 @@
+.todo-list{
+    margin-top: 30px;
+}
+/*
+ header
+*/
+
+header div:first-child div{
+    background-color: #5082BF;
+    height: 45px;
+    color: whitesmoke;
+    font-size: 22px;
+    line-height: 50px;
+}
+header div:nth-child(2) div{
+    height: 45px;
+    color: #82B99B;
+    font-size: 22px;
+    line-height: 50px;
+    background-color: #D1D1D1;
+}
+
+.add_task{
+    margin-top: 5px;
+}
+.btn-task{
+    background-color: #82B99B;
+    color: whitesmoke;
+    margin-bottom: 9px;
+}
+
