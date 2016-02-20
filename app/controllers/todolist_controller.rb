@@ -3,18 +3,22 @@ class TodolistController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
   def index
-    # render plain: 1
-      @projects = Project.find(current_user.id)
+      @projects = Project.where(user_id: current_user.id)
+      render 'todolist/index'
   end
 
   def add_project
-
+    data = {
+        name: params[:name][0],
+        user_id: current_user.id
+    }
+    @project = Project.new(data)
+    @project.save
   end
-
 
   def is_auth
     if !current_user
-      redirect_to root_path
+      redirect_to log_in_path
     end
   end
 
