@@ -1,53 +1,52 @@
 <div class="todo-list">
-
-    <header>
-        <div class="row">
-          <div class="col-md-offset-2 col-md-1">
-                <span class="glyphicon glyphicon-calendar"></span>
-          </div>
-          <div class="col-md-7">
-                Complete the test task for Ruby Garage
-          </div>
-          <div class="col-md-1 col-md-pull-1 text-center">
-            <span class="glyphicon glyphicon-pencil"></span>&nbsp;
-            <span class="glyphicon glyphicon-trash"></span>
-          </div>
-        </div>
-
-        <div class="row">
-        <div class="col-md-offset-2 col-md-1">
-          <span class="glyphicon glyphicon-plus"></span>
-        </div>
-        <div class="col-md-6">
-          <input type="text" class="form-control add_task" placeholder="Start typing here to create a task...">
-        </div>
-         <div class="col-md-1">
-            <button type="submit" class="btn btn-task">Add task</button>
-          </div>
-      </div>
-    </header>
-
-  <main>
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-          <table class="table table-condensed table-hover">
-            <tbody>
-            <tr>
-              <td><input type="checkbox"></td>
-              <td>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diem
-                nonummy nibh euismod tincidunt ut lacreet dolore magna aliguam erat volutpat.
-                Ut wisis enim ad minim veniam, quis nostrud exerci tution ullamcorper suscipit
-                lobortis nisl ut aliquip ex ea commodo consequat.</td>
-              <td style="width: 70px">
-                <span class="fa fa-sort"></span>
-                <span class="glyphicon glyphicon-pencil"></span>
-                <span class="glyphicon glyphicon-trash"></span>
-              </td>
-            </tr>
-            </tbody>
+          <table class="table">
+                <thead>
+                    <tr>
+                      <td>
+                        <span class="glyphicon glyphicon-calendar"></span>
+                      </td>
+                      <td>
+                        Complete the test task for Ruby Garage
+                      </td>
+                      <td>
+                        <span class="glyphicon glyphicon-pencil"></span>&nbsp;
+                        <span class="glyphicon glyphicon-trash"></span>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        <span class="glyphicon glyphicon-plus"></span>
+                      </td>
+                      <td>
+                        <input type="text" class="form-control add_task" placeholder="Start typing here to create a task...">
+                      </td>
+                      <td>
+                        <button type="submit" class="btn btn-add_task">Add task</button>
+                      </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                      <td>
+                        <input type="checkbox">
+                      </td>
+                      <td>
+                        Вже давно відомо, що читабельний зміст буде заважати зосередитись людині, яка оцінює композицію сторінки. Сенс використання Lorem Ipsum полягає в тому, що цей текст має більш-менш нормальне розподілення літер на відміну від, наприклад, "Тут іде текст. Тут іде текст." Це робить текст схожим на оповідний. Багато програм верстування та веб-дизайну використовують Lorem Ipsum як зразок і пошук за терміном "lorem ipsum" відкриє багато веб-сайтів, які знаходяться ще в зародковому стані. Різні версії Lorem Ipsum з'явились за минулі роки, деякі випадково, деякі було створено зумисно (зокрема, жартівливі).
+                      </td>
+                      <td>
+                        <span class="fa fa-sort"></span>&nbsp;
+                        <span class="fa fa-pencil"></span>&nbsp;
+                        <span class="fa fa-trash"></span>
+                      </td>
+                    </tr>
+                </tbody>
           </table>
         </div>
+      <div class="text-center add_todo" style="clear: both">
+      <button type="button" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-plus"></span>&nbsp;<strong>Add TODO List</strong></button>
+      </div>
     </div>
-  </main>
-
 </div>

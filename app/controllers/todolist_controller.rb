@@ -1,8 +1,8 @@
 class TodolistController < ApplicationController
   before_action :is_auth
 
-  def index
-    render 'todolist/index'
+  def index3
+    render 'todolist/index3'
   end
 
   def is_auth
