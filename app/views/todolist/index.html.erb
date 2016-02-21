@@ -1,78 +1,93 @@
 <%if @projects.present? %>
-
-
-
-<div class="todo-list">
+    <div class="todo-list">
     <% @projects.each do |project|%>
-      <div class="row project_<%= project.id%>">
-        <div class="col-md-8 col-md-offset-2">
-          <table class="table">
-            <thead>
-            <tr>
-              <td>
-                <span class="glyphicon glyphicon-calendar"></span>
-              </td>
-              <td>
-                <%=project.name%>
-              </td>
-              <td>
-                <span class="glyphicon glyphicon-pencil"></span>&nbsp;
-                <span class="glyphicon glyphicon-trash" onclick="remove_item(<%=project.id%>,'project')"></span>
-              </td>
-            </tr>
+          <div class="row project_<%= project.id%>">
+            <div class="col-md-8 col-md-offset-2">
+              <table class="table">
+                <thead>
+                <tr>
+                  <td>
+                    <span class="glyphicon glyphicon-calendar"></span>
+                  </td>
+                  <td>
+                    <%=project.name%>
+                  </td>
+                  <td>
+                    <span class="glyphicon glyphicon-pencil"></span>&nbsp;
+                    <span class="glyphicon glyphicon-trash" onclick="remove_item(<%=project.id%>,'project')"></span>
+                  </td>
+                </tr>
 
-            <tr>
-              <%= form_tag do %>
-                  <td>
-                    <span class="glyphicon glyphicon-plus"></span>
-                  </td>
-                  <td>
-                    <%= text_field(:text,'',{class: 'form-control task_filed', placeholder: 'Start typing here to create a task...'})%>
-                  </td>
-                  <td>
-                    <span class="btn btn-add_task" onclick="add_task(<%=project.id%>)">Add task</span>
-                  </td>
-              <% end %>
-            </tr>
-            </thead>
-            <tbody>
-            <% project.tasks.each do |task|%>
-            <tr class="task task_<%= task.id%>">
-              <td>
-                <input type="checkbox">
-              </td>
-              <td>
-                <%=task.name%>
-              </td>
-              <td>
-                <span class="fa fa-sort"></span>&nbsp;
-                <span class="fa fa-pencil"></span>&nbsp;
-                <span class="fa fa-trash" onclick="remove_item(<%=task.id%>,'task')"></span>
-              </td>
-            </tr>
-            <%end%>
-            </tbody>
-          </table>
-        </div>
-      </div>
+                <tr>
+                  <%= form_tag do %>
+                      <td>
+                        <span class="glyphicon glyphicon-plus"></span>
+                      </td>
+                      <td>
+                        <%= text_field(:text,'',{class: 'form-control task_filed', placeholder: 'Start typing here to create a task...'})%>
+                      </td>
+                      <td>
+                        <span class="btn btn-add_task" onclick="add_task(<%=project.id%>)">Add task</span>
+                      </td>
+                  <% end %>
+                </tr>
+                </thead>
+                <tbody>
+                <% project.tasks.each do |task|%>
+                    <tr class="task task_<%= task.id%>">
+                      <td>
+                        <input type="checkbox">
+                      </td>
+                      <td>
+                        <%=task.name%>
+                      </td>
+                      <td>
+                        <span class="fa fa-sort"></span>&nbsp;
+                        <span class="fa fa-pencil"></span>&nbsp;
+                        <span class="fa fa-trash" onclick="remove_item(<%=task.id%>,'task')"></span>
+                      </td>
+                    </tr>
+                <%end%>
+                </tbody>
+              </table>
+            </div>
+          </div>
     <%end%>
-    <div align="center" class="btn-add_todo_1">
-        <!--<%= link_to 'Add TODO List',:add_project,{class: 'btn btn-primary btn-lg',remote: true} %>-->
-        <!--<%= link_to 'Add TODO List',:add_project,{class: 'btn btn-primary btn-lg',remote: true} %>-->
-    </div>
 </div>
 <%end%>
 
-<!--<div class="row empty_projects hidden">-->
-  <!--<div class="col-md-offset-3 col-md-6 text-center">-->
-    <!--<h2>No projects found</h2>-->
-    <!--<%= form_tag(:add_project, remote: true) do  %>-->
-        <!--<div>-->
-          <!--<%= text_field(:name,'',{class: 'form-control', placeholder: 'Start typing here to create a project'})%>-->
-        <!--</div><br>-->
-        <!--<div>-->
-          <!--<%= submit_tag 'Add TODO List', class: 'btn btn-primary btn-lg btn-add_todo'%>-->
-        <!--</div>-->
-    <!--<% end %>-->
-  <!--</div>-->
-<!--</div>-->
+<!--Modal window-->
+
+<div style="margin-top: 10%" class="modal fade" id="todo_form" tabindex="-1" role="dialog" aria-labelledby="TODOLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="TODOLabel">New TODO List</h4>
+      </div>
+      <div class="modal-body">
+        <%= form_tag(:add_project, method: 'post', :remote => true) do %>
+          <div class="form-group">
+            <label for="todo-input" class="control-label">Title</label>
+            <%= text_field(:name,'',{class: 'form-control', placeholder: 'Start typing here to create a project',id:'todo-input'})%>
+            <!--<input name="name" type="text" class="form-control" id="todo-input">-->
+          </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <%= button_tag('Add list',{class:'btn btn-primary'}) %>
+              <!--<button type="button" class="btn btn-primary add_todo">Add list</button>-->
+            </div>
+        <%end%>
+      </div>
+      <!--<div class="modal-footer">-->
+        <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+        <!--&lt;!&ndash;<%= button_tag('Add list',{class:'btn btn-primary'}) %>&ndash;&gt;-->
+        <!--&lt;!&ndash;<button type="button" class="btn btn-primary add_todo">Add list</button>&ndash;&gt;-->
+      <!--</div>-->
+    </div>
+  </div>
+</div>
+
+<div align="center" style="margin-top: 30px">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#todo_form" data-whatever="@mdo">Add TODO List</button>
+</div>

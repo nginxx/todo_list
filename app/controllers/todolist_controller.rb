@@ -1,6 +1,7 @@
 class TodolistController < ApplicationController
   before_action :is_auth
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
+  respond_to :html, :js
 
   def index
       @projects = Project.get_user_projects(current_user.id)
@@ -9,12 +10,17 @@ class TodolistController < ApplicationController
   end
 
   def add_project
+    # render plain: params[:name]
     data = {
         name: params[:name][0],
         user_id: current_user.id
     }
     @project = Project.new(data)
     @project.save!
+
+    respond_to do |format|
+      format.js
+    end
   end
 
   def delete_item()
