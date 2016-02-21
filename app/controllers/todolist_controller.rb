@@ -23,7 +23,7 @@ class TodolistController < ApplicationController
     if type == 'project'
       Project.delete(id)
     elsif type == 'task'
-      # finish for tasks todo
+      Task.delete(id)
     end
   end
 

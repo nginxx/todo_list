@@ -1,4 +1,7 @@
 <%if @projects.present? %>
+
+
+
 <div class="todo-list">
     <% @projects.each do |project|%>
       <div class="row project_<%= project.id%>">
@@ -33,40 +36,43 @@
             </tr>
             </thead>
             <tbody>
-            <tr class="task">
+            <% project.tasks.each do |task|%>
+            <tr class="task task_<%= task.id%>">
               <td>
                 <input type="checkbox">
               </td>
               <td>
-                Вже давно відомо, що читабельний зміст буде заважати зосередитись людині, яка оцінює композицію сторінки. Сенс використання Lorem Ipsum полягає в тому, що цей текст має більш-менш нормальне розподілення літер на відміну від, наприклад, "Тут іде текст. Тут іде текст." Це робить текст схожим на оповідний. Багато програм верстування та веб-дизайну використовують Lorem Ipsum як зразок і пошук за терміном "lorem ipsum" відкриє багато веб-сайтів, які знаходяться ще в зародковому стані. Різні версії Lorem Ipsum з'явились за минулі роки, деякі випадково, деякі було створено зумисно (зокрема, жартівливі).
+                <%=task.name%>
               </td>
               <td>
                 <span class="fa fa-sort"></span>&nbsp;
                 <span class="fa fa-pencil"></span>&nbsp;
-                <span class="fa fa-trash"></span>
+                <span class="fa fa-trash" onclick="remove_item(<%=task.id%>,'task')"></span>
               </td>
             </tr>
+            <%end%>
             </tbody>
           </table>
         </div>
       </div>
     <%end%>
     <div align="center" class="btn-add_todo_1">
-        <%= link_to 'Add TODO List',:add_project,{class: 'btn btn-primary btn-lg',remote: true} %>
+        <!--<%= link_to 'Add TODO List',:add_project,{class: 'btn btn-primary btn-lg',remote: true} %>-->
+        <!--<%= link_to 'Add TODO List',:add_project,{class: 'btn btn-primary btn-lg',remote: true} %>-->
     </div>
 </div>
 <%end%>
 
-<div class="row empty_projects hidden">
-  <div class="col-md-offset-3 col-md-6 text-center">
-    <h2>No projects found</h2>
-    <%= form_tag(:add_project, remote: true) do  %>
-        <div>
-          <%= text_field(:name,'',{class: 'form-control', placeholder: 'Start typing here to create a project'})%>
-        </div><br>
-        <div>
-          <%= submit_tag 'Add TODO List', class: 'btn btn-primary btn-lg btn-add_todo'%>
-        </div>
-    <% end %>
-  </div>
-</div>
+<!--<div class="row empty_projects hidden">-->
+  <!--<div class="col-md-offset-3 col-md-6 text-center">-->
+    <!--<h2>No projects found</h2>-->
+    <!--<%= form_tag(:add_project, remote: true) do  %>-->
+        <!--<div>-->
+          <!--<%= text_field(:name,'',{class: 'form-control', placeholder: 'Start typing here to create a project'})%>-->
+        <!--</div><br>-->
+        <!--<div>-->
+          <!--<%= submit_tag 'Add TODO List', class: 'btn btn-primary btn-lg btn-add_todo'%>-->
+        <!--</div>-->
+    <!--<% end %>-->
+  <!--</div>-->
+<!--</div>-->
