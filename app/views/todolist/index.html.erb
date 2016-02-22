@@ -13,7 +13,8 @@
                     <%=project.name%>
                   </td>
                   <td>
-                    <span class="glyphicon glyphicon-pencil"></span>&nbsp;
+                    <span class="glyphicon glyphicon-pencil" data-toggle="modal" data-project_id = "<%=project.id%>" data-target="#todo_form" data-todo_title = "<%= project.name%>"
+                          data-form_name="Edit TODO List"></span>&nbsp;
                     <span class="glyphicon glyphicon-trash" onclick="remove_item(<%=project.id%>,'project')"></span>
                   </td>
                 </tr>
@@ -63,31 +64,26 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="TODOLabel">New TODO List</h4>
+        <h4 class="modal-title" id="TODOLabel"></h4>
       </div>
       <div class="modal-body">
         <%= form_tag(:add_project, method: 'post', :remote => true) do %>
           <div class="form-group">
             <label for="todo-input" class="control-label">Title</label>
             <%= text_field(:name,'',{class: 'form-control', placeholder: 'Start typing here to create a project',id:'todo-input'})%>
-            <!--<input name="name" type="text" class="form-control" id="todo-input">-->
           </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
               <%= button_tag('Add list',{class:'btn btn-primary'}) %>
-              <!--<button type="button" class="btn btn-primary add_todo">Add list</button>-->
             </div>
+
         <%end%>
       </div>
-      <!--<div class="modal-footer">-->
-        <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
-        <!--&lt;!&ndash;<%= button_tag('Add list',{class:'btn btn-primary'}) %>&ndash;&gt;-->
-        <!--&lt;!&ndash;<button type="button" class="btn btn-primary add_todo">Add list</button>&ndash;&gt;-->
-      <!--</div>-->
+
     </div>
   </div>
 </div>
 
 <div align="center" style="margin-top: 30px">
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#todo_form" data-whatever="@mdo">Add TODO List</button>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#todo_form" data-form_name="New TODO List">Add TODO List</button>
 </div>

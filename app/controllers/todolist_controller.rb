@@ -23,6 +23,15 @@ class TodolistController < ApplicationController
     end
   end
 
+  def edit_project
+      @project = Project.find(params[:id])
+      render plain: params
+      data = {
+          name: params[:name],
+      }
+      @project.update(data)
+  end
+
   def delete_item()
     type = params[:type]
     id = params[:id]
