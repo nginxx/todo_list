@@ -1,1 +1,38 @@
-<p>sdfdsfdsfdsfdsfdsfds</p>
+<div class="row project_<%= @project.id%>">
+  <div class="col-md-8 col-md-offset-2">
+    <table class="table">
+      <thead>
+      <tr>
+        <td>
+          <span class="glyphicon glyphicon-calendar"></span>
+        </td>
+        <td class="pr_name">
+          <%=@project.name%>
+        </td>
+        <td>
+          <span class="glyphicon glyphicon-pencil" data-project_id = "<%=@project.id%>" data-title = "<%=@project.name%>" data-toggle="modal" data-target="#edit_project"></span>&nbsp;
+          <span class="glyphicon glyphicon-trash" onclick="remove_item(<%=@project.id%>,'project')"></span>
+
+        </td>
+      </tr>
+
+      <tr>
+        <%= form_tag do %>
+            <td>
+              <span class="glyphicon glyphicon-plus"></span>
+            </td>
+            <td>
+              <%= text_field(:text,'',{class: 'form-control task_filed', placeholder: 'Start typing here to create a task...'})%>
+            </td>
+            <td>
+              <span class="btn btn-add_task" onclick="add_task(<%=@project.id%>)">Add task</span>
+            </td>
+        <% end %>
+      </tr>
+      </thead>
+      <tbody>
+      
+      </tbody>
+    </table>
+  </div>
+</div>

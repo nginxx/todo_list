@@ -9,8 +9,11 @@ table{
     -moz-box-shadow: 11px 9px 20px -9px rgba(0,0,0,0.75);
     box-shadow: 11px 9px 20px -9px rgba(0,0,0,0.75);
 }
-table .glyphicon-trash,.fa-trash:hover{
+table .glyphicon-trash,.glyphicon-pencil,.fa-trash:hover{
     cursor: pointer;
+}
+table a.glyphicon-trash{
+    color: #40506C;
 }
 /*Thead*/
 
@@ -81,5 +84,14 @@ tbody tr:last-child td:last-child{
 }
 .add_todo button span{
     color: #324A70;
+}
+
+/*Modal*/
+.modal{
+    margin-top: 10%;
+}
+
+[data-target="#add_project"] {
+    margin-bottom: 5%;
 }
 

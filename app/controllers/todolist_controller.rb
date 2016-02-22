@@ -23,14 +23,10 @@ class TodolistController < ApplicationController
     end
   end
 
-  def delete_item()
-    type = params[:type]
-    id = params[:id]
-    if type == 'project'
-      Project.delete(id)
-    elsif type == 'task'
-      Task.delete(id)
-    end
+  def edit_project
+    @project = Project.find(params[:id][0])
+    @project.update!({name: params[:name][0]})
+    render nothing: true
   end
 
   def add_task()
@@ -40,6 +36,18 @@ class TodolistController < ApplicationController
       }
       @task = Task.new(data)
       @task.save!
+  end
+
+  def delete_item
+    # render plain: params
+    type = params[:type]
+    id = params[:id]
+    if type == 'project'
+      Project.delete(id)
+    elsif type == 'task'
+      Task.delete(id)
+    end
+    render nothing: true
   end
 
   def is_auth

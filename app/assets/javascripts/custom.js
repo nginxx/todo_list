@@ -6,29 +6,59 @@ var minimal_name_length = 5;
 
 $(document).ready(function(){
 
-    $('.btn-add_todo').click(function(){
-        var name = $('form input.form-control').val();
-        if(name.length < minimal_name_length){
-            fail();
-        }
+    var parent = $('.todo-list');
+    parent.on('click','.glyphicon-pencil',function(){
+        var title = $(this).data('title');
+        var project_id = $(this).data('project_id');
+        $('#edit_title').val(title);
+        $('#project_id').val(project_id);
     });
 
-    //$('.add_todo').click(function(){
-    //    var name = $('#todo-input').val();
+    $('#edit_project').click(function(){
+        var title = $('#edit_title').val();
+        if(title.length < minimal_name_length){
+            fail(); return false
+        }
+        var project_id = $('#project_id').val();
+        $('.project_'+project_id+' .pr_name').text(title);
+    });
+
+
+
+    $("[data-target='#add_project']").click(function(){
+        $('#todo-add').val('');
+    });
+
+    //$('.btn-add_todo').click(function(){
+    //    var name = $('form input.form-control').val();
     //    if(name.length < minimal_name_length){
-    //       fail();
+    //        fail();
     //    }
-    //    $.ajax({
-    //        url: '/add_project/',
-    //        method: 'POST',
-    //        data: {'name': name},
-    //        dataType: 'html',
-    //        success: function(result){
-    //            $('.todo-list').append(result)
-    //        }
-    //    })
     //});
+
+    //edit_form.on('show.bs.modal', function (event) {
+    //    var button = $(event.relatedTarget),
+    //                 title = $(button).data('title'),
+    //                 project_id = $(button).data('project_id');
+    //    $('#edit_title').val(title);
+    //    $('#project_id').val(project_id);
+    //});
+
+    //$('#edit_project').find('button.btn-primary').click(function () {
+    //    var title = $('#edit_title').val();
+    //    if(title.length < minimal_name_length){
+    //        fail();
+    //    }
+    //    var project_id = $('#project_id').val();
+    //    $('.project_'+project_id+' .pr_name').text(title);
+    //})
+
 });
+
+$(document).ajaxSuccess(function(){
+    $('.modal').modal('hide');
+});
+
 function remove_item(id,type)
 {
     if(type == 'project'){
@@ -36,13 +66,26 @@ function remove_item(id,type)
     }else if(type == 'task'){
         $('.task_'+id).remove();
     }
-    if($('table').length == 0){
-        $('.empty_projects').removeClass('hidden');
-        $('.btn-add_todo_1').remove();
-    }
-
-    $.post('/'+type+'/delete/' + id)
+    $.delete('/'+type+'/delete/' + id)
 }
+
+
+
+
+//function remove_item(id,type)
+//{
+//    if(type == 'project'){
+//        $('.project_'+id).remove();
+//    }else if(type == 'task'){
+//        $('.task_'+id).remove();
+//    }
+//    if($('table').length == 0){
+//        $('.empty_projects').removeClass('hidden');
+//        $('.btn-add_todo_1').remove();
+//    }
+//
+//    $.post('/'+type+'/delete/' + id)
+//}
 
 function add_task(project_id)
 {
@@ -60,5 +103,4 @@ function add_task(project_id)
 function fail()
 {
     alert('Title should\'t be shorter than '+ minimal_name_length +' symbols!');
-    return false;
 }
