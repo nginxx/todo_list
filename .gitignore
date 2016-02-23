@@ -11,5 +11,8 @@
 /log/*
 !/log/.keep
 /tmp
-.idea/*
-vendor/*
+/.idea/*
+/vendor/bundle
+db/
+log/
+test/

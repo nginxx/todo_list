@@ -1,5 +1,5 @@
-<%if @projects.present? %>
-    <div class="todo-list">
+
+<div class="todo-list">
     <% @projects.each do |project|%>
           <div class="row project_<%= project.id%>">
             <div class="col-md-8 col-md-offset-2">
@@ -9,13 +9,12 @@
                   <td>
                     <span class="glyphicon glyphicon-calendar"></span>
                   </td>
-                  <td>
+                  <td class="pr_name">
                     <%=project.name%>
                   </td>
                   <td>
-                    <span class="glyphicon glyphicon-pencil" data-toggle="modal" data-project_id = "<%=project.id%>" data-target="#todo_form" data-todo_title = "<%= project.name%>"
-                          data-form_name="Edit TODO List"></span>&nbsp;
-                    <span class="glyphicon glyphicon-trash" onclick="remove_item(<%=project.id%>,'project')"></span>
+                    <span class="glyphicon glyphicon-pencil" data-project_id = "<%=project.id%>" data-title = "<%=project.name%>" data-toggle="modal" data-target="#edit_project"></span>&nbsp;
+                    <%= link_to '',delete_path(id:project.id,type:'project'),class:'glyphicon glyphicon-trash',onclick:"remove_item(#{project.id},'project')", remote:true,method: :post%>
                   </td>
                 </tr>
 
@@ -55,35 +54,58 @@
           </div>
     <%end%>
 </div>
-<%end%>
 
-<!--Modal window-->
+<!--Modal window ADD Project-->
 
-<div style="margin-top: 10%" class="modal fade" id="todo_form" tabindex="-1" role="dialog" aria-labelledby="TODOLabel">
-  <div class="modal-dialog" role="document">
+<div class="modal fade" tabindex="-1" role="dialog" id="add_project">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="TODOLabel"></h4>
+        <h4 class="modal-title">New TODO Project</h4>
       </div>
       <div class="modal-body">
         <%= form_tag(:add_project, method: 'post', :remote => true) do %>
-          <div class="form-group">
-            <label for="todo-input" class="control-label">Title</label>
-            <%= text_field(:name,'',{class: 'form-control', placeholder: 'Start typing here to create a project',id:'todo-input'})%>
-          </div>
+            <div class="form-group">
+              <label for="todo-add" class="control-label">Title</label>
+              <%= text_field(:name,'',{class: 'form-control', placeholder: 'Start typing here to create a project',id:'todo-add'})%>
+            </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <%= button_tag('Add list',{class:'btn btn-primary'}) %>
+              <%= button_tag('Add project',{class:'btn btn-primary'}) %>
             </div>
-
         <%end%>
       </div>
-
     </div>
   </div>
 </div>
 
-<div align="center" style="margin-top: 30px">
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#todo_form" data-form_name="New TODO List">Add TODO List</button>
+<!--Modal window EDIT Project-->
+
+<div class="modal fade" tabindex="-1" role="dialog" id="edit_project">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Edit TODO Project</h4>
+      </div>
+      <div class="modal-body">
+        <%= form_tag(:edit_project, method: 'post', :remote => true) do %>
+            <div class="form-group">
+            <%= text_field(:id,'',{type: 'hidden', id: 'project_id'})%>
+            <label for="edit_title" class="control-label">Title</label>
+            <%= text_field(:name,'',{class: 'form-control',id:'edit_title'})%>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <%= button_tag('Edit project',{class:'btn btn-primary'}) %>
+            </div>
+            <%end%>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div align="center" style="margin-top: 5%">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_project">Add TODO Project</button>
 </div>
