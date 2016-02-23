@@ -14,13 +14,26 @@ $(document).ready(function(){
         $('#project_id').val(project_id);
     });
 
-    $('#edit_project').click(function(){
+    parent.on('click','.glyphicon-trash',function(){
+        var project_id = $(this).data('project_id');
+        var type = $(this).data('type');
+        remove_item(project_id,type);
+    });
+
+    $('#edit_project .btn-primary').click(function(){
         var title = $('#edit_title').val();
         if(title.length < minimal_name_length){
             fail(); return false
         }
         var project_id = $('#project_id').val();
         $('.project_'+project_id+' .pr_name').text(title);
+    });
+
+    $('#add_project .btn-primary').click(function(){
+        var title = $('#todo-add').val();
+        if(title.length < minimal_name_length){
+            fail(); return false
+        }
     });
 
 
@@ -66,7 +79,7 @@ function remove_item(id,type)
     }else if(type == 'task'){
         $('.task_'+id).remove();
     }
-    $.delete('/'+type+'/delete/' + id)
+    $.post('/'+type+'/delete/' + id)
 }
 
 

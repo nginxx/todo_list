@@ -11,7 +11,7 @@
         </td>
         <td>
           <span class="glyphicon glyphicon-pencil" data-project_id = "<%=@project.id%>" data-title = "<%=@project.name%>" data-toggle="modal" data-target="#edit_project"></span>&nbsp;
-          <span class="glyphicon glyphicon-trash" onclick="remove_item(<%=@project.id%>,'project')"></span>
+          <span class="glyphicon glyphicon-trash" data-project_id = "<%=@project.id%>" data-type = 'project'></span>
 
         </td>
       </tr>
