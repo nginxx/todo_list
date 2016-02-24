@@ -66,7 +66,6 @@ $(document).ready(function(){
     });
 
 
-
     $("[data-target='#add_project']").click(function(){
         $('#todo-add').val('');
     });
