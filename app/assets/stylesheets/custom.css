@@ -9,7 +9,7 @@ table{
     -moz-box-shadow: 11px 9px 20px -9px rgba(0,0,0,0.75);
     box-shadow: 11px 9px 20px -9px rgba(0,0,0,0.75);
 }
-table .glyphicon-trash,.glyphicon-pencil,.fa-trash:hover{
+table .glyphicon-trash,.glyphicon-pencil,.fa-trash,.fa-pencil:hover{
     cursor: pointer;
 }
 table a.glyphicon-trash{
@@ -41,6 +41,10 @@ thead tr:first-child td:last-child{
 }
 thead tr:nth-child(2){
     background-color:  #D1D1D1;
+}
+.glyphicon-plus{
+    color:  #73AA8C;
+    font-size: 22px;
 }
 thead tr:nth-child(2) td:first-child{
     color:  #73AA8C;
@@ -94,4 +98,3 @@ tbody tr:last-child td:last-child{
 [data-target="#add_project"] {
     margin-bottom: 5%;
 }
-

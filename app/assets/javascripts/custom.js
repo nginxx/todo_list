@@ -8,16 +8,45 @@ $(document).ready(function(){
 
     var parent = $('.todo-list');
     parent.on('click','.glyphicon-pencil',function(){
-        var title = $(this).data('title');
-        var project_id = $(this).data('project_id');
+        var title = $(this).data('title'),
+            project_id = $(this).data('project_id');
         $('#edit_title').val(title);
         $('#project_id').val(project_id);
     });
 
     parent.on('click','.glyphicon-trash',function(){
-        var project_id = $(this).data('project_id');
-        var type = $(this).data('type');
+        var project_id = $(this).data('project_id'),
+            type = $(this).data('type');
         remove_item(project_id,type);
+    });
+
+    parent.on('click','.fa-trash',function(){
+        var task_id = $(this).data('task_id'),
+            type = $(this).data('type');
+        remove_item(task_id,type);
+    });
+
+    parent.on('click','.fa-pencil',function(){
+        var task_id = $(this).data('task_id'),
+            name = $(this).data('name'),
+            project_id = $(this).data('project_id');
+        $('.project_'+project_id+' .task_field').val(name);
+    });
+
+    parent.on('change','.is_done',function(){
+        var task_id = $(this).data('task_id'),
+            status = $(this).prop('checked');
+        if(status == true){
+            $('.task_'+task_id).css( "background-color", "#DCBFBF" );
+        }else{
+            $('.task_'+task_id).css( "background-color", "white" );
+        }
+        $.ajax({
+            url: '/done/' + task_id,
+            method: 'POST',
+            data: {status: status}
+        });
+
     });
 
     $('#edit_project .btn-primary').click(function(){
@@ -46,6 +75,7 @@ $(document).ready(function(){
 
 $(document).ajaxSuccess(function(){
     $('.modal').modal('hide');
+    $('.task_field').val('');
 });
 
 function remove_item(id,type)
@@ -57,7 +87,6 @@ function remove_item(id,type)
     }
     $.post('/'+type+'/delete/' + id)
 }
-
 
 function fail()
 {

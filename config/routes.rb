@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   post 'edit_project' => 'todolist#edit_project', as: 'edit_project'
   post 'add_task' => 'todolist#add_task', as: 'add_task'
   post ':type/delete/:id' => 'todolist#delete_item', as: 'delete', constraints: {type: 'project|task'}
+  post 'done/:id' => 'todolist#is_done'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

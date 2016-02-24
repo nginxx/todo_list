@@ -17,15 +17,16 @@
       </tr>
 
       <tr>
-        <%= form_tag do %>
+        <%= form_tag(:add_task, method: 'post', remote: true) do %>
             <td>
               <span class="glyphicon glyphicon-plus"></span>
             </td>
             <td>
-              <%= text_field(:text,'',{class: 'form-control task_filed', placeholder: 'Start typing here to create a task...'})%>
+              <%= text_field(:task,:project_id,type: 'hidden',value: @project.id)%>
+              <%= text_field(:task,:name,class: 'form-control task_field', placeholder: 'Start typing here to create a task...')%>
             </td>
             <td>
-              <span class="btn btn-add_task" data-project_id = "<%=@project.id%>" onclick="add_task(<%=@project.id%>)">Add task</span>
+              <%= button_tag('Add task',class:'btn btn-add_task') %>
             </td>
         <% end %>
       </tr>

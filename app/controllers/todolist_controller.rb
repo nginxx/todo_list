@@ -5,7 +5,6 @@ class TodolistController < ApplicationController
 
   def index
       @projects = Project.get_user_projects(current_user.id)
-      # render plain: @projects.to_yaml
       render 'todolist/index'
   end
 
@@ -22,9 +21,7 @@ class TodolistController < ApplicationController
 
   def edit_project
     params.permit!
-    @project = Project.find(params[:project][:id])
-    params.permit :name
-    @project.update!(params[:project])
+    Project.update(params[:project][:id],params[:project])
     render nothing: true
   end
 
@@ -39,7 +36,6 @@ class TodolistController < ApplicationController
   end
 
   def delete_item
-    # render plain: params
     type = params[:type]
     id = params[:id]
     if type == 'project'
@@ -47,6 +43,11 @@ class TodolistController < ApplicationController
     elsif type == 'task'
       Task.delete(id)
     end
+    render nothing: true
+  end
+
+  def is_done
+    @task = Task.update(params[:id],completed: params[:status])
     render nothing: true
   end
 
