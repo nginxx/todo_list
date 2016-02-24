@@ -10,12 +10,9 @@ class TodolistController < ApplicationController
   end
 
   def add_project
-    # render plain: params[:name]
-    data = {
-        name: params[:name][0],
-        user_id: current_user.id
-    }
-    @project = Project.new(data)
+    params[:project][:user_id] = current_user.id
+    params.permit!
+    @project = Project.new(params[:project])
     @project.save!
 
     respond_to do |format|
@@ -24,18 +21,21 @@ class TodolistController < ApplicationController
   end
 
   def edit_project
-    @project = Project.find(params[:id][0])
-    @project.update!({name: params[:name][0]})
+    params.permit!
+    @project = Project.find(params[:project][:id])
+    params.permit :name
+    @project.update!(params[:project])
     render nothing: true
   end
 
   def add_task()
-      data = {
-          project_id: params[:id],
-          name: params[:task]
-      }
-      @task = Task.new(data)
+      params.permit!
+      @task = Task.new(params[:task])
       @task.save!
+
+      respond_to do |format|
+        format.js
+      end
   end
 
   def delete_item

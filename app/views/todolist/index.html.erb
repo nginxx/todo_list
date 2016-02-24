@@ -19,15 +19,16 @@
                 </tr>
 
                 <tr>
-                  <%= form_tag do %>
+                  <%= form_tag(:add_task, method: 'post', remote: true) do %>
                       <td>
                         <span class="glyphicon glyphicon-plus"></span>
                       </td>
                       <td>
-                        <%= text_field(:text,'',{class: 'form-control task_filed', placeholder: 'Start typing here to create a task...'})%>
+                        <%= text_field(:task,:project_id,type: 'hidden',value: project.id)%>
+                        <%= text_field(:task,:name,{class: 'form-control task_filed', placeholder: 'Start typing here to create a task...'})%>
                       </td>
                       <td>
-                        <span class="btn btn-add_task" onclick="add_task(<%=project.id%>)">Add task</span>
+                        <%= button_tag('Add task',{class:'btn btn-add_task'}) %>
                       </td>
                   <% end %>
                 </tr>
@@ -65,14 +66,14 @@
         <h4 class="modal-title">New TODO Project</h4>
       </div>
       <div class="modal-body">
-        <%= form_tag(:add_project, method: 'post', :remote => true) do %>
+        <%= form_tag(:add_project, method: 'post', remote: true) do %>
             <div class="form-group">
               <label for="todo-add" class="control-label">Title</label>
-              <%= text_field(:name,'',{class: 'form-control', placeholder: 'Start typing here to create a project',id:'todo-add'})%>
+              <%= text_field(:project,:name,class: 'form-control', placeholder: 'Start typing here to create a project',id:'todo-add')%>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <%= button_tag('Add project',{class:'btn btn-primary'}) %>
+              <%= button_tag('Add project',class:'btn btn-primary') %>
             </div>
         <%end%>
       </div>
@@ -91,17 +92,17 @@
         <h4 class="modal-title">Edit TODO Project</h4>
       </div>
       <div class="modal-body">
-        <%= form_tag(:edit_project, method: 'post', :remote => true) do %>
+        <%= form_tag(:edit_project, method: 'post', remote: true) do %>
             <div class="form-group">
-            <%= text_field(:id,'',{type: 'hidden', id: 'project_id'})%>
+            <%= text_field(:project,:id,type: 'hidden', id: 'project_id')%>
             <label for="edit_title" class="control-label">Title</label>
-            <%= text_field(:name,'',{class: 'form-control',id:'edit_title'})%>
+            <%= text_field(:project,:name,class: 'form-control',id:'edit_title')%>
             </div>
             <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <%= button_tag('Edit project',{class:'btn btn-primary'}) %>
+            <%= button_tag('Edit project',class:'btn btn-primary') %>
             </div>
-            <%end%>
+        <%end%>
       </div>
     </div>
   </div>

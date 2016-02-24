@@ -25,7 +25,7 @@
               <%= text_field(:text,'',{class: 'form-control task_filed', placeholder: 'Start typing here to create a task...'})%>
             </td>
             <td>
-              <span class="btn btn-add_task" onclick="add_task(<%=@project.id%>)">Add task</span>
+              <span class="btn btn-add_task" data-project_id = "<%=@project.id%>" onclick="add_task(<%=@project.id%>)">Add task</span>
             </td>
         <% end %>
       </tr>

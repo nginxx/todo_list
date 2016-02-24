@@ -1,0 +1,13 @@
+<tr class="task task_<%= @task.id%>">
+  <td>
+    <input type="checkbox">
+  </td>
+  <td>
+    <%=@task.name%>
+  </td>
+  <td>
+    <span class="fa fa-sort"></span>&nbsp;
+    <span class="fa fa-pencil"></span>&nbsp;
+    <span class="fa fa-trash" onclick="remove_item(<%=@task.id%>,'task')"></span>
+  </td>
+</tr>
