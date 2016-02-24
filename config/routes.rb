@@ -1,19 +1,14 @@
 Rails.application.routes.draw do
-  get 'todolist/index'
-
-  get 'sessions/new'
-
-  get 'users/new'
-
 
   get "log_out" => "sessions#destroy", :as => "log_out"
   get "log_in" => "sessions#new", :as => "log_in"
   get "sign_up" => "users#new", :as => "sign_up"
-  root :to => "users#new"
+  root :to => 'todolist#index'
   resources :users
   resources :sessions
 
   get 'todo_list' => 'todolist#index', as: 'todo'
+  
   post 'add_project' => 'todolist#add_project', as: 'add_project'
   post 'edit_project' => 'todolist#edit_project', as: 'edit_project'
   post ':add_task/:id' => 'todolist#add_task'
