@@ -27,7 +27,7 @@ class TodolistController < ApplicationController
 
   def add_task()
       params.permit!
-      @task = Task.new(params[:task])
+      @task = Task.new(name:params[:name],project_id:params[:project_id])
       @task.save!
 
       respond_to do |format|

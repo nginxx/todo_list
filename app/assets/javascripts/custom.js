@@ -74,7 +74,7 @@ $(document).ready(function(){
 
 $(document).ajaxSuccess(function(){
     $('.modal').modal('hide');
-    $('.task_field').val('');
+    $('.form-control').val('');
 });
 
 function remove_item(id,type)
@@ -85,6 +85,16 @@ function remove_item(id,type)
         $('.task_'+id).remove();
     }
     $.post('/'+type+'/delete/' + id)
+}
+
+function project(id)
+{
+    var name = $('.task_field'+id).val();
+    $.ajax({
+        url: '/add_task',
+        method: 'POST',
+        data: {project_id:id, name:name}
+    });
 }
 
 function fail()
