@@ -37,9 +37,9 @@ $(document).ready(function(){
         var task_id = $(this).data('task_id'),
             status = $(this).prop('checked');
         if(status == true){
-            $('.task_'+task_id).css( "background-color", "#DCBFBF" );
+            $('.task_'+task_id).css( "background-color", "#DFFFE4" );
         }else{
-            $('.task_'+task_id).css( "background-color", "white" );
+            $('.task_'+task_id).css( "background-color", "" );
         }
         $.ajax({
             url: '/done/' + task_id,

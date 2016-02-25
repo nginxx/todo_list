@@ -6,8 +6,10 @@
     <%=@task.name%>
   </td>
   <td>
+    <div class="task_tools">
     <span class="fa fa-sort"></span>&nbsp;
     <span class="fa fa-pencil" data-name="<%= @task.name %>" data-task_id="<%= @task.id %>" data-project_id="<%= @task.project_id %>"></span>&nbsp;
     <span class="fa fa-trash" data-type="task" data-task_id="<%= @task.id %>"></span>
+    </div>
   </td>
 </tr>

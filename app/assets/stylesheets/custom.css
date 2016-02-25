@@ -1,5 +1,5 @@
 body{
-    background-color: #C38C09;
+    background: linear-gradient(to right, #D29113, #CCCBB6);
 }
 .todo-list{
     margin-top: 30px;
@@ -9,6 +9,25 @@ table{
     -moz-box-shadow: 11px 9px 20px -9px rgba(0,0,0,0.75);
     box-shadow: 11px 9px 20px -9px rgba(0,0,0,0.75);
 }
+
+table tr:hover{
+    background-color: #FCFED5;
+    cursor: pointer;
+}
+
+.task_tools, .project_tools{
+    display: none;
+}
+
+table tbody tr:hover .task_tools{
+    display: block;
+    text-align: center;
+}
+table thead tr:hover .project_tools{
+    display: block;
+    text-align: center;
+}
+
 table .glyphicon-trash,.glyphicon-pencil,.fa-trash,.fa-pencil:hover{
     cursor: pointer;
 }
