@@ -1,4 +1,4 @@
-class Query < ActiveRecord::Base
+class Sqltask < ActiveRecord::Base
 
   def self.query_1
     query = 'SELECT DISTINCT status FROM tasks ORDER BY status'
