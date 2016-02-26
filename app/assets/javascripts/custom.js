@@ -15,12 +15,16 @@ $(document).ready(function(){
     });
 
     parent.on('click','.glyphicon-trash',function(){
+        var answer = confirm('Are you sure ?');
+        if(!answer) return false;
         var project_id = $(this).data('project_id'),
             type = $(this).data('type');
         remove_item(project_id,type);
     });
 
     parent.on('click','.fa-trash',function(){
+        var answer = confirm('Are you sure ?');
+        if(!answer) return false;
         var task_id = $(this).data('task_id'),
             type = $(this).data('type');
         remove_item(task_id,type);
@@ -105,6 +109,11 @@ function remove_item(id,type)
 function add_task(project_id)
 {
     var name = $('.task_field'+project_id).val();
+
+    if(name.length < minimal_name_length){
+        fail(); return false
+    }
+
     $.ajax({
         url: '/add_task',
         method: 'POST',
@@ -115,6 +124,9 @@ function add_task(project_id)
 function edit_task(project_id)
 {
     var name = $('.project_'+project_id+' .task_field'+project_id).val();
+    if(name.length < minimal_name_length){
+        fail(); return false
+    }
     var task_id = $('.project_'+project_id+' .btn-edit_task').attr('data-task_id');
     $.ajax({
         url: '/edit_task',
