@@ -30,7 +30,11 @@ $(document).ready(function(){
         var task_id = $(this).data('task_id'),
             name = $(this).data('name'),
             project_id = $(this).data('project_id');
-        $('.project_'+project_id+' .task_field').val(name);
+        $('.task_field'+project_id).val(name);
+        $('.project_'+project_id+' .btn-edit_task').removeClass('hidden');
+        $('.project_'+project_id+' .btn-edit_task').attr('data-task_id',task_id);
+        $('.project_'+project_id+' .btn-add_task').addClass('hidden')
+        $('.project_'+project_id+' .fa-ban').removeClass('hidden');
     });
 
     parent.on('change','.is_done',function(){
@@ -46,6 +50,14 @@ $(document).ready(function(){
             method: 'POST',
             data: {status: status}
         });
+
+    });
+
+    parent.on('click','.fa-ban',function(){
+        $('.fa-ban').addClass('hidden');
+        $('.form-control').val('');
+        $('.btn-edit_task').addClass('hidden');
+        $('.btn-add_task').removeClass('hidden');
 
     });
 
@@ -75,6 +87,9 @@ $(document).ready(function(){
 $(document).ajaxSuccess(function(){
     $('.modal').modal('hide');
     $('.form-control').val('');
+    $('.btn-edit_task').addClass('hidden');
+    $('.btn-add_task').removeClass('hidden');
+    $('.fa-ban').addClass('hidden');
 });
 
 function remove_item(id,type)
@@ -87,13 +102,28 @@ function remove_item(id,type)
     $.post('/'+type+'/delete/' + id)
 }
 
-function project(id)
+function add_task(project_id)
 {
-    var name = $('.task_field'+id).val();
+    var name = $('.task_field'+project_id).val();
     $.ajax({
         url: '/add_task',
         method: 'POST',
-        data: {project_id:id, name:name}
+        data: {project_id:project_id, name:name}
+    });
+}
+
+function edit_task(project_id)
+{
+    var name = $('.project_'+project_id+' .task_field'+project_id).val();
+    var task_id = $('.project_'+project_id+' .btn-edit_task').attr('data-task_id');
+    $.ajax({
+        url: '/edit_task',
+        method: 'POST',
+        data: {project_id:project_id, name:name, task_id:task_id},
+        success:function(){
+            $('.task_'+task_id+' .task_name').text(name);
+            $('.fa-ban').addClass('hidden');
+        }
     });
 }
 

@@ -25,7 +25,9 @@
           <%= text_field(:task,:name,class: "form-control task_field#{@project.id}", placeholder: 'Start typing here to create a task...')%>
         </td>
         <td>
-          <%= button_tag('Add task',class:'btn btn-add_task',onclick:"project(#{@project.id})") %>
+          <%= button_tag('Add task',class:'btn btn-add_task',onclick:"add_task(#{@project.id})") %>
+          <%= button_tag('Edit task',class:'btn btn-edit_task hidden',onclick:"edit_task(#{@project.id})") %>
+          <a class="fa fa-ban hidden"> cancel</a>
         </td>
       </tr>
       </thead>

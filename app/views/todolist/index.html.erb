@@ -28,7 +28,9 @@
                         <%= text_field(:task,:name,class: "form-control task_field#{project.id}", placeholder: 'Start typing here to create a task...')%>
                       </td>
                       <td>
-                        <%= button_tag('Add task',class:'btn btn-add_task',onclick:"project(#{project.id})") %>
+                        <%= button_tag('Add task',class:'btn btn-add_task',onclick:"add_task(#{project.id})") %>
+                        <%= button_tag('Edit task',class:'btn btn-edit_task hidden',onclick:"edit_task(#{project.id})") %>
+                        <a class="fa fa-ban hidden"> cancel</a>
                       </td>
                 </tr>
                 </thead>
@@ -38,7 +40,7 @@
                       <td>
                         <input <%if task.completed == 'true'%>checked <%end%> name="is_done" class="is_done" data-task_id="<%= task.id%>" type="checkbox">
                       </td>
-                      <td>
+                      <td class="task_name">
                         <%=task.name%>
                       </td>
                       <td>

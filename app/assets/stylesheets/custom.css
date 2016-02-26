@@ -69,10 +69,13 @@ thead tr:nth-child(2) td:first-child{
     color:  #73AA8C;
     font-size: 22px;
 }
-.btn-add_task{
+.btn-add_task,.btn-edit_task{
     background-color: #82B99B;
     color: whitesmoke;
     text-shadow: 3px 3px 2px rgba(130, 130, 130, 1);
+}
+.fa-ban{
+    color: red;
 }
 
 /*Tbody*/
