@@ -66,7 +66,7 @@ $(document).ready(function(){
     });
 
     $('#edit_project .btn-primary').click(function(){
-        var title = $('#edit_title').val();
+        var title = $('#edit_title').val().trim();
         if(title.length < minimal_name_length){
             fail(); return false
         }
@@ -75,7 +75,7 @@ $(document).ready(function(){
     });
 
     $('#add_project .btn-primary').click(function(){
-        var title = $('#todo-add').val();
+        var title = $('#todo-add').val().trim();
         if(title.length < minimal_name_length){
             fail(); return false
         }
@@ -108,7 +108,7 @@ function remove_item(id,type)
 
 function add_task(project_id)
 {
-    var name = $('.task_field'+project_id).val();
+    var name = $('.task_field'+project_id).val().trim();
     if(name.length < minimal_name_length){
         fail(); return false
     }
@@ -121,7 +121,7 @@ function add_task(project_id)
 
 function edit_task(project_id)
 {
-    var name = $('.project_'+project_id+' .task_field'+project_id).val();
+    var name = $('.project_'+project_id+' .task_field'+project_id).val().trim();
     if(name.length < minimal_name_length){
         fail(); return false
     }
