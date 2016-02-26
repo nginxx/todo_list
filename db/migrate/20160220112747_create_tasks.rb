@@ -4,7 +4,7 @@ class CreateTasks < ActiveRecord::Migration
       t.string :name, null: false
       t.string :completed, default: 'false'
       t.integer :project_id, null: false
-      t.integer :position, null: true
+      t.integer :position, default: 0
       t.timestamps null: false
     end
     add_foreign_key :tasks, :projects, on_delete: :cascade

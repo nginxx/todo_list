@@ -26,7 +26,13 @@ class TodolistController < ApplicationController
   end
 
   def add_task()
-      @task = Task.new(name:params[:name],project_id:params[:project_id])
+      position = Task.get_max_position
+      if position.nil?
+        position = 0
+      else
+        position += 1
+      end
+      @task = Task.new(name:params[:name],project_id:params[:project_id],position:position)
       @task.save!
 
       respond_to do |format|
