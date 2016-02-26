@@ -12,6 +12,7 @@
         <td>
           <div class="project_tools">
           <span class="glyphicon glyphicon-pencil" data-project_id = "<%=@project.id%>" data-title = "<%=@project.name%>" data-toggle="modal" data-target="#edit_project"></span>&nbsp;
+          <span class="tool_border"></span> &nbsp;
           <span class="glyphicon glyphicon-trash" data-project_id = "<%=@project.id%>" data-type = 'project'></span>
           </div>
         </td>
@@ -25,7 +26,9 @@
           <%= text_field(:task,:name,class: "form-control task_field#{@project.id}", placeholder: 'Start typing here to create a task...')%>
         </td>
         <td>
-          <%= button_tag('Add task',class:'btn btn-add_task',onclick:"project(#{@project.id})") %>
+          <%= button_tag('Add task',class:'btn btn-add_task',onclick:"add_task(#{@project.id})") %>
+          <%= button_tag('Edit task',class:'btn btn-edit_task hidden',onclick:"edit_task(#{@project.id})") %>
+          <a class="fa fa-ban hidden"> cancel</a>
         </td>
       </tr>
       </thead>

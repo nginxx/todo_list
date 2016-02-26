@@ -26,13 +26,17 @@ class TodolistController < ApplicationController
   end
 
   def add_task()
-      params.permit!
       @task = Task.new(name:params[:name],project_id:params[:project_id])
       @task.save!
 
       respond_to do |format|
         format.js
       end
+  end
+
+  def edit_task
+    Task.update(params[:task_id], name: params[:name], project_id: params[:project_id])
+    render nothing: true
   end
 
   def delete_item

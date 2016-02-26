@@ -12,7 +12,6 @@
 !/log/.keep
 /tmp
 .idea
-/vendor/bundle
-db/
+/vendor
 log/
 test/
