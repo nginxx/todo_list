@@ -1,3 +1,4 @@
-1. Run migrations.
-2. Run seeds.
-3. Default email: user@mail.ru  password: 123
+1. Install bundles
+2. Run migrations.
+3. Run seeds.
+4. Default email: user@mail.ru  password: 123
