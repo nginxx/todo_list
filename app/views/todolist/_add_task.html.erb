@@ -7,7 +7,8 @@
   </td>
   <td>
     <div class="task_tools">
-      <span class="fa fa-chevron-up"></span><span class="fa fa-chevron-down"></span>&nbsp;|
+      <span class="fa fa-chevron-up" data-task_id="<%= @task.id %>" data-position="<%= @task.position %>"></span>
+      <span class="fa fa-chevron-down" data-down="true" data-task_id="<%= @task.id %>" data-position="<%= @task.position %>"></span>&nbsp;|
       <span class="fa fa-pencil" data-name="<%= @task.name %>" data-task_id="<%= @task.id %>" data-project_id="<%= @task.project_id %>"></span>&nbsp;|
     <span class="fa fa-trash" data-type="task" data-task_id="<%= @task.id %>"></span>
     </div>
