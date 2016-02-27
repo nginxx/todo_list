@@ -5,3 +5,10 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+@user = User.create(password:123,email:'user@mail.ru')
+
+@project = Project.create(name: 'My first project', user_id: @user.id)
+for i in 1..5
+  Task.create(name: "Task #{i}",project_id: @project.id, position: i)
+end
