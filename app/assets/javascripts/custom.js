@@ -2,7 +2,7 @@
  * Created by user on 20.02.16.
  */
 
-var minimal_name_length = 5;
+var minimal_name_length = 2;
 
 $(document).ready(function(){
 
@@ -33,12 +33,61 @@ $(document).ready(function(){
     parent.on('click','.fa-pencil',function(){
         var task_id = $(this).data('task_id'),
             name = $(this).data('name'),
-            project_id = $(this).data('project_id');
+            project_id = $(this).data('project_id'),
+            btn_edit = $('.project_'+project_id+' .btn-edit_task');
+
         $('.task_field'+project_id).val(name);
-        $('.project_'+project_id+' .btn-edit_task').removeClass('hidden');
-        $('.project_'+project_id+' .btn-edit_task').attr('data-task_id',task_id);
+        btn_edit.removeClass('hidden');
+        btn_edit.attr('data-task_id',task_id);
         $('.project_'+project_id+' .btn-add_task').addClass('hidden')
         $('.project_'+project_id+' .fa-ban').removeClass('hidden');
+    });
+
+    parent.on('click','.fa-chevron-up, .fa-chevron-down',function(){
+        var items_count = $('.fa-chevron-up').length,
+            task_id = $(this).data('task_id'),
+            task_position = $(this).data('position'),
+            current_task = $('.task_'+task_id),
+            neighbour_task = $(current_task).prev(),
+            down = $(this).data('down');
+        if(down){
+            neighbour_task = $(current_task).next();
+        }
+        var neighbour_task_id = neighbour_task.find('.fa-chevron-up').data('task_id'),
+            neighbour_task_position = neighbour_task.find('.fa-chevron-up').data('position'),
+            data = {
+            task_id: task_id,
+            task_position: task_position,
+            neighbour_task_id: neighbour_task_id,
+            neighbour_task_position: neighbour_task_position
+        };
+
+        $.ajax({
+            url: '/prioritize',
+            method: 'POST',
+            data: data,
+            beforeSend: function(xhr){
+                if((task_position == items_count && down) || (task_position == 1 && !down)){
+                    xhr.abort()
+                }
+            },
+            success: function(){
+                if(down){
+                    $(current_task).insertAfter(neighbour_task);
+                }else{
+                    $(current_task).insertBefore(neighbour_task);
+                }
+                current_task.find('.fa-chevron-down').attr('data-position',neighbour_task_position);
+                current_task.find('.fa-chevron-down').removeData('position');
+                current_task.find('.fa-chevron-up').attr('data-position',neighbour_task_position);
+                current_task.find('.fa-chevron-up').removeData('position');
+                neighbour_task.find('.fa-chevron-down').attr('data-position',task_position);
+                neighbour_task.find('.fa-chevron-down').removeData('position');
+                neighbour_task.find('.fa-chevron-up').attr('data-position',task_position);
+                neighbour_task.find('.fa-chevron-up').removeData('position');
+            }
+        });
+
     });
 
     parent.on('change','.is_done',function(){
@@ -65,7 +114,7 @@ $(document).ready(function(){
 
     });
 
-    $('#edit_project .btn-primary').click(function(){
+    $('#edit_project').find('.btn-primary').click(function(){
         var title = $('#edit_title').val().trim();
         if(title.length < minimal_name_length){
             fail(); return false
@@ -74,7 +123,7 @@ $(document).ready(function(){
         $('.project_'+project_id+' .pr_name').text(title);
     });
 
-    $('#add_project .btn-primary').click(function(){
+    $('#add_project').find('.btn-primary').click(function(){
         var title = $('#todo-add').val().trim();
         if(title.length < minimal_name_length){
             fail(); return false

@@ -56,6 +56,19 @@ class TodolistController < ApplicationController
     render nothing: true
   end
 
+  def prioritize
+        data_1 = [
+            params[:task_id],
+            params[:neighbour_task_position]
+        ]
+        data_2 = [
+            params[:neighbour_task_id],
+            params[:task_position]
+        ]
+        Task.update_task_position(data_1,data_2)
+        render nothing: true
+  end
+
   def is_done
     @task = Task.update(params[:id],completed: params[:status])
     render nothing: true
