@@ -27,7 +27,7 @@ class Sqltask < ActiveRecord::Base
 
   def self.query_6
     query = 'SELECT COUNT(id) AS tasks_cnt, name FROM tasks GROUP BY project_id
-             HAVING BY tasks_cnt > 1 ORDER BY name'
+             HAVING tasks_cnt > 1 ORDER BY name'
   end
 
   def self.query_7
@@ -41,7 +41,7 @@ class Sqltask < ActiveRecord::Base
     query = "SELECT COUNT(tasks.id) as cnt, project.name FROM tasks
              LEFT JOIN projects ON tasks.project_id = projects.id
              WHERE tasks.status = 'completed'
-             GROUP BY tasks.project_id HAVING BY cnt > 10 ORDER BY tasks.project_id"
+             GROUP BY tasks.project_id HAVING cnt > 10 ORDER BY tasks.project_id"
   end
 
 end
